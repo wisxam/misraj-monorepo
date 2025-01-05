@@ -1,0 +1,26 @@
+{
+  "name": "misraj-nest-app",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "misraj-nest-app/src",
+  "projectType": "application",
+  "tags": [],
+  "targets": {
+    "serve": {
+      "executor": "@nx/js:node",
+      "defaultConfiguration": "development",
+      "dependsOn": ["build"],
+      "options": {
+        "buildTarget": "misraj-nest-app:build",
+        "runBuildTargetDependencies": false
+      },
+      "configurations": {
+        "development": {
+          "buildTarget": "misraj-nest-app:build:development"
+        },
+        "production": {
+          "buildTarget": "misraj-nest-app:build:production"
+        }
+      }
+    }
+  }
+}

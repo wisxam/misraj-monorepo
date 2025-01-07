@@ -21,4 +21,8 @@ export class UpdateCapsuleDto {
   @IsOptional()
   @IsEnum(CapsuleStatus)
   status?: CapsuleStatus;
+
+  @IsOptional()
+  @IsEnum(CapsuleStatus)
+  remainingTime?: number;
 }

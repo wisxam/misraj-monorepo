@@ -24,15 +24,14 @@ export class JwtAuthGuard extends AuthGuard('jwt') {
       );
     }
 
-    console.log('Token:', token);
-
     try {
+      // Decode and verify the token
       const decoded = await this.jwtService.verifyAsync(token, {
         secret: process.env.JWT_SECRET,
       });
-      console.log('Decoded Token:', decoded);
+
+      request.user = decoded;
     } catch (error) {
-      console.error('Token verification failed:', error);
       throw new UnauthorizedException('Token verification failed');
     }
 

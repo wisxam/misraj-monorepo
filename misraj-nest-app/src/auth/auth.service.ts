@@ -1,9 +1,4 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  Logger,
-  Inject,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException, Inject } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import type { ICrypt } from '../lib/bcrypt';
 import { UserRepository } from '../infra/repositories/user.repository';
@@ -21,12 +16,8 @@ export class AuthService {
     email: string,
     password: string
   ): Promise<UserWithoutPassword> {
-    Logger.log('Starting user validation...');
-    const startTime = Date.now();
-
     const user = await this.userRepository.findByEmail(email);
     if (!user) {
-      Logger.warn(`User not found for email: ${email}`);
       throw new UnauthorizedException('User not found');
     }
 
@@ -35,14 +26,9 @@ export class AuthService {
       user.password
     );
     if (!check) {
-      Logger.warn(`Invalid password for email: ${email}`);
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const endTime = Date.now();
-    Logger.log(`User validation completed in ${endTime - startTime}ms`);
-
-    // Exclude password from the response
     const { password: _, ...userWithoutPassword } = user;
     return userWithoutPassword;
   }

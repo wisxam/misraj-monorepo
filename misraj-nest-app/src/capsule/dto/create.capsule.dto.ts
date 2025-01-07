@@ -1,4 +1,10 @@
-import { IsDate, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import {
+  IsDate,
+  IsNotEmpty,
+  IsNumber,
+  IsOptional,
+  IsString,
+} from 'class-validator';
 
 export class CreateCapsuleDto {
   @IsString()
@@ -16,4 +22,9 @@ export class CreateCapsuleDto {
   @IsDate()
   @IsNotEmpty()
   releaseDate!: Date;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @IsOptional()
+  remainingTime!: Number;
 }

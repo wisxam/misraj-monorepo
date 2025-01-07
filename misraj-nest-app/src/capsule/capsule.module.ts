@@ -5,6 +5,8 @@ import { JwtModule } from '@nestjs/jwt';
 import { CapsuleService } from './capsule.service';
 import { CapsuleController } from './capsule.controller';
 
+import { ScheduleModule } from '@nestjs/schedule';
+
 @Module({
   imports: [
     InfraModule,
@@ -12,6 +14,7 @@ import { CapsuleController } from './capsule.controller';
       secret: process.env.JWT_SECRET,
       signOptions: { expiresIn: '60m' },
     }),
+    ScheduleModule.forRoot(),
   ],
   providers: [
     CapsuleService,
